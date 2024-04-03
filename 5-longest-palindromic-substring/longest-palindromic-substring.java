@@ -1,38 +1,44 @@
-/* O(n²), as we have nested loops iterating through the string. The outer loop runs for each character in the string, and the inner loop expands around the center to find palindromes. In the worst case, we may need to expand on both sides for every character, resulting in a quadratic time complexity.*/
 
-/*O(1), as we only use a constant amount of extra space to store variables and temporary values.*/ 
 
+/* Time: O(n^2) Space O(1) */
 class Solution {
-    public String longestPalindrome(String s) {
 
-        int maxLength = 1;
-        int start = 0;
+   int start; int maxLen;
 
-        if(s.length() <= 1)
-            return s;
+   public String longestPalindrome(String s) {
 
-        for(int i=0; i< s.length();i++)
-        {
-            int currLen1 = palindrome(s,i,i);  // racecar
-            int currLen2 = palindrome(s,i,i+1); // general case
-            int currLen = Math.max(currLen1, currLen2);
-            if(currLen > maxLength)
-            {
-                maxLength = currLen;
-                start =  i - (currLen-1) / 2;
-            }
-        }
-            return s.substring(start, start+maxLength);
-        
-    }
+        // Base Case:
+        if(s.length() < 2) return s;
 
-    public int palindrome(String s, int left, int right) 
-    {
-        while(left>= 0 && right < s.length() && s.charAt(left)==s.charAt(right))
-        {
-            left--;
-            right++;
-        }
-        return right-left-1;
-    }   
+       for(int i = 0; i < s.length(); i++){
+
+           extendPalindrome(s, i, i);// odd length
+
+           extendPalindrome(s, i, i + 1);// even length
+
+       }
+
+       return s.substring(start, start + maxLen);
+
+   }
+
+   private void extendPalindrome(String s, int left, int right){
+
+       while(left >= 0 && right < s.length() && s.charAt(left) == s.charAt(right)){
+
+           left--; 
+           right++;
+
+       }    
+
+       if(right - (left + 1) > maxLen){
+        // if length is more, increment
+           maxLen = right - (left + 1);
+        // adjust the pointer.
+           start = left + 1;
+
+       }
+
+   }
+
 }
