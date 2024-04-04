@@ -3,8 +3,6 @@ class Solution {
      int counter = 0; 
     public int countSubstrings(String s) {
 
-       
-
         for(int i=0 ; i<s.length();i++)
         {
             counter = palindrome(s,i,i);
@@ -26,9 +24,6 @@ class Solution {
             counter++;
         }
 
-
-
-        
       return counter;
     }
 }
