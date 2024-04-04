@@ -1,3 +1,7 @@
+/* 
+Time : O(n) where n is total all characters in all the strings
+Space: O(k) where k is the little space which we are taking for the delimiter */
+
 public class Codec {
 
     // Encodes a list of strings to a single string.
